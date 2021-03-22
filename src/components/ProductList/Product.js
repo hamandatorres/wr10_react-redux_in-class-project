@@ -1,22 +1,28 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { addToCart } from '../../ducks/cartReducer'
 import './productList.css'
 
 const Product = (props) => {
+  const {
+    data: { name, price, description, id },
+  } = props
   return (
     <div className="product">
       <Link to={`/product/${id}`} className="product-name">
-        PRODUCT NAME
+        {name}
       </Link>
 
-      <p>PRODUCT PRICE</p>
-      <p>PRODUCT DESC</p>
+      <p>${price}</p>
+      <p>{description}</p>
       <button
         className="add-to-cart"
+        onClick={() => props.addToCart(props.data)}
       >
         Add to cart
       </button>
     </div>
   )
 }
-export default Product
+export default connect(null, { addToCart })(Product)

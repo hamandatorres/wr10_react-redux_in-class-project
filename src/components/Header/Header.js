@@ -1,8 +1,7 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 import './header.css'
-
-// We'll also want the img to be clickable and take the user to landing
 
 const Header = (props) => {
   return (
@@ -13,6 +12,7 @@ const Header = (props) => {
             src="https://pngimg.com/uploads/letter_p/letter_p_PNG83.png"
             className="fancy-p"
             alt="P"
+            onClick={() => props.history.push('/')}
           />
           <p>ARTIAL</p>
         </div>
@@ -20,7 +20,7 @@ const Header = (props) => {
         <p>MARKET</p>
       </div>
 
-      <h1 className="user">WELCOME, GUEST!</h1>
+      <h1 className="user">WELCOME, {props.username}!</h1>
 
       <Link className="cart-hold" to="/cart">
         <img
@@ -28,10 +28,14 @@ const Header = (props) => {
           alt="cart"
           className="cart"
         />
-        <p className="cart-notification">0</p>
+        {props.cart && <p className="cart-notification">{props.cart.length}</p>}
       </Link>
     </header>
   )
 }
 
-export default Header
+function mapStateToProps(reduxState) {
+  return { ...reduxState.user, ...reduxState.cart }
+}
+
+export default connect(mapStateToProps)(withRouter(Header))
