@@ -21,7 +21,7 @@ class ProductListContainer extends Component {
     return (
       <div className="container">
         <h1 className="product-list-head">
-          {this.props.user ? 'All of our products' : 'Log in to see products'}
+          {this.props.isLoggedIn ? 'All of our products' : 'Log in to see products'}
         </h1>
         {this.props.isLoggedIn ? (
           <ProductList />
