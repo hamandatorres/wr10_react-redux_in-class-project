@@ -5,7 +5,7 @@ import './productList.css'
 const Product = (props) => {
   return (
     <div className="product">
-      <Link to={`/product/${id}`} className="product-name">
+      <Link>
         PRODUCT NAME
       </Link>
 
